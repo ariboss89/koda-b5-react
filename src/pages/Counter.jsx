@@ -1,6 +1,6 @@
 import { useState } from "react";
-import "./App.css";
-import Title from "./components/Title";
+import "../styles/App.css";
+import Title from "../components/Title";
 
 function App() {
   const [number, setNumber] = useState(0);
