@@ -9,7 +9,7 @@ function RickMorty() {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    if (search != "" || species != "") {
+    if (search != "" || species != "0") {
       filterAndSearch();
     }
 
@@ -24,6 +24,7 @@ function RickMorty() {
       );
       if (!response.ok)
         throw new Error(`${response.status}: ${response.statusText}`);
+
       const data = await response.json();
       const ricks = data.results;
       const newCharacters = ricks.map((item, idx) => {
@@ -87,7 +88,7 @@ function RickMorty() {
                 name="species"
                 className="border-black border-2 border-solid rounded-md p-1 min-w-80"
               >
-                <option selected disabled value="">
+                <option selected value="0">
                   Choose Species
                 </option>
                 <option value="Human">Human</option>
