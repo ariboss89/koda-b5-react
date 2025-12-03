@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import ShowRickMorty from "../components/ShowRickMorty";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 function RickMorty() {
   const [characters, setCharacters] = useState([]);
@@ -63,9 +65,7 @@ function RickMorty() {
 
   return (
     <div>
-      <header className="p-5 h-[15vh] bg-sky-400 text-2xl font-bold select-none">
-        Rick & Morty Fetching Data
-      </header>
+      <Header />
       <main>
         <section>
           <form noValidate onSubmit={submitHandler}>
@@ -111,6 +111,7 @@ function RickMorty() {
           <ShowRickMorty arrChar={characters} />
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

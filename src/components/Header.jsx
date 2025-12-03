@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
 function Header() {
+  const location = useLocation();
   return (
     <>
       <header className="flex justify-between p-5 select-none bg-sky-500 text-white font-bold">
@@ -9,13 +10,32 @@ function Header() {
         <nav className="flex flex-row justify-center items-center">
           <ul className="flex gap-5">
             <li className="hover:text-gray-600">
-              <Link to={"/"}>Home</Link>
+              <Link
+                to={"/"}
+                className={location.pathname === "/" ? "text-gray-600" : ""}
+              >
+                Home
+              </Link>
             </li>
             <li className="hover:text-gray-600">
-              <Link to={"/RickMorty"}>Rick & Morty</Link>
+              <Link
+                to={"/RickMorty"}
+                className={
+                  location.pathname === "/RickMorty" ? "text-gray-600" : ""
+                }
+              >
+                Rick & Morty
+              </Link>
             </li>
             <li className="hover:text-gray-600">
-              <Link to={"/Products"}>Products</Link>
+              <Link
+                to={"/Products"}
+                className={
+                  location.pathname === "/Products" ? "text-gray-600" : ""
+                }
+              >
+                Products
+              </Link>
             </li>
           </ul>
         </nav>

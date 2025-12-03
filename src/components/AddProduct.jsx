@@ -3,8 +3,6 @@ function AddProduct(props) {
   const submitHandler = (event) => {
     event.preventDefault();
     const newProduct = {};
-    // validasi tidak boleh kosong title
-    // jika error maka stop
     Object.assign(newProduct, {
       name: event.target["product-name"].value,
       qty: event.target["product-qty"].value,

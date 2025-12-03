@@ -1,7 +1,13 @@
 import React from "react";
+/**
+ * Header Component
+ * @param {Object} props
+ * @param {function} props.changeReviews The what what
+ * @returns {JSX.Element}
+ */
 
 function AddReview(props) {
-  const { addReviews } = props;
+  const { changeReviews } = props;
   const submitHandler = (event) => {
     event.preventDefault();
     const newReview = {};
@@ -10,11 +16,25 @@ function AddReview(props) {
       email: event.target["email"].value,
       review: event.target["review"].value,
     });
-    addReviews((review) => {
+    changeReviews((review) => {
       return [...review, newReview];
     });
 
-    localStorage.setItem("review", [newReview]);
+    console.log(newReview, "ini datanya");
+
+    let valueStore = [];
+    let old = localStorage.getItem("review");
+
+    console.log(old, "data lama");
+
+    if (old != null) {
+      valueStore = JSON.parse(old);
+      valueStore.push(newReview);
+    } else {
+      valueStore.push(newReview);
+    }
+
+    localStorage.setItem("review", JSON.stringify(valueStore));
 
     event.target["name"].value = "";
     event.target["email"].value = "";
@@ -22,7 +42,9 @@ function AddReview(props) {
   };
   return (
     <form noValidate onSubmit={submitHandler}>
-      <header className="text-center font-bold text-xl">Review</header>
+      <header className="text-center font-bold text-xl select-none">
+        Review
+      </header>
       <div>
         <label htmlFor="name" className="flex items-start">
           Name

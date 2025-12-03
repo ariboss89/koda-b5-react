@@ -1,4 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --animation-loading: loading 2s linear infinite;
+  --warna-asap: whitesmoke;
+  --color-asap: var(--warna-asap);
+  --color-primary: skyblue;
+  --font-roboto: "Roboto", sans-serif;
+}
+
+@layer base {
+  h1 {
+    @apply font-roboto;
+  }
+}
+
+@utility border-std {
+  /*cara pertama jika mau menggunakan kelas tailwind harus menggunakan @apply
+   @apply border-2 border-solid border-black; */
+
+  border: 2px;
+}
 
 /*:root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
