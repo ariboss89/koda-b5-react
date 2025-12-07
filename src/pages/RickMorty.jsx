@@ -2,16 +2,21 @@ import { useState, useEffect } from "react";
 import ShowRickMorty from "../components/ShowRickMorty";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { useSearchParams } from "react-router";
 
 function RickMorty() {
   const [characters, setCharacters] = useState([]);
-  const [search, setSearch] = useState();
-  const [species, setSpecies] = useState();
+  const [search, setSearch] = useState("");
+  const [species, setSpecies] = useState("0");
+  const [_, setSearchParam] = useSearchParams();
 
   const submitHandler = (event) => {
     event.preventDefault();
 
     if (search != "" || species != "0") {
+      setSearchParam(
+        new URLSearchParams({ [event.target.name]: event.target.value })
+      );
       filterAndSearch();
     }
 
@@ -22,7 +27,7 @@ function RickMorty() {
   const filterAndSearch = async () => {
     try {
       const response = await fetch(
-        `https://rickandmortyapi.com/api/character?name=${search}&species=${species}`
+        `${import.meta.env.VITE_MORTY_API}?name=${search}&species=${species}`
       );
       if (!response.ok)
         throw new Error(`${response.status}: ${response.statusText}`);
@@ -32,7 +37,9 @@ function RickMorty() {
       const newCharacters = ricks.map((item, idx) => {
         return {
           id: idx,
+          idChar: item.id,
           image: item.image,
+          name: item.name,
         };
       });
       setCharacters(newCharacters);
@@ -43,7 +50,7 @@ function RickMorty() {
 
   useEffect(() => {
     (async () => {
-      const url = "https://rickandmortyapi.com/api/character";
+      const url = `${import.meta.env.VITE_MORTY_API}`;
       try {
         const response = await fetch(url);
         if (!response.ok)
@@ -53,7 +60,9 @@ function RickMorty() {
         const newCharacters = ricks.map((item, idx) => {
           return {
             id: idx,
+            idChar: item.id,
             image: item.image,
+            name: item.name,
           };
         });
         setCharacters(newCharacters);
@@ -68,31 +77,34 @@ function RickMorty() {
       <Header />
       <main>
         <section>
-          <form noValidate onSubmit={submitHandler}>
-            <div className="flex flex-col p-5 items-center md:flex-row">
-              <label className="text-left mr-5 min-w-30">Find character</label>
+          <form
+            noValidate
+            onSubmit={submitHandler}
+            className="flex flex-row justify-between items-center p-5 gap-2"
+          >
+            <div className="flex justify-between items-center w-full h-4">
+              <label className="text-left mr-5">Find character</label>
               <input
-                name="yourName"
+                name="search"
                 type="text"
                 placeholder="Find character"
-                className="pl-5 border-2 border-solid p-1 border-black rounded-md min-w-80"
+                className="pl-5 border-2 border-solid p-1 border-black rounded-md"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <label className="text-left ml-5 mr-5 min-w-30">
-                Choose Species
-              </label>
+            </div>
+            <div className="flex justify-between items-center w-full">
+              <label className="text-left mr-5">Choose Species</label>
               <select
                 value={species}
                 onChange={(e) => setSpecies(e.target.value)}
                 name="species"
-                className="border-black border-2 border-solid rounded-md p-1 min-w-80"
+                className="border-black border-2 border-solid rounded-md p-1"
               >
-                <option selected value="0">
-                  Choose Species
-                </option>
-                <option value="Human">Human</option>
-                <option value="Alien">Alien</option>
+                <option disabled>Choose Species</option>
+                <option value={""}>All</option>
+                <option value={"Human"}>Human</option>
+                <option value={"Alien"}>Alien</option>
                 <option value="Humanoid">Humanoid</option>
                 <option value="Animal">Animal</option>
                 <option value="Mythological Creature">
@@ -101,13 +113,13 @@ function RickMorty() {
                 <option value="Robot">Robot</option>
                 <option value="Cronenberg">Cronenberg</option>
               </select>
-              <button className="border-2 border-solid border-black rounded-md p-1 ml-5 w-full cursor-pointer bg-sky-400 text-white font-bold">
-                Search
-              </button>
             </div>
+            <button className="flex justify-center items-center w-full border-2 cursor-pointer rounded-sm p-1 bg-primary font-bold border-white">
+              Search
+            </button>
           </form>
         </section>
-        <div className="grid grid-cols-3 grid-rows-3 gap-2 p-2">
+        <div className="grid grid-cols-3 grid-rows-3 gap-2 px-5 pb-5">
           <ShowRickMorty arrChar={characters} />
         </div>
       </main>

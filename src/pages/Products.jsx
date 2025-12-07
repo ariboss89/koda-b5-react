@@ -11,6 +11,7 @@ function Products() {
     { name: "Durian", qty: 100, price: 50000, status: "Available" },
   ]);
 
+  console.log(import.meta.env.VITE_MY_ENV);
   return (
     <div>
       <Header />
