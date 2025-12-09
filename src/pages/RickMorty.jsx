@@ -1,14 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ShowRickMorty from "../components/ShowRickMorty";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useSearchParams } from "react-router";
+import useFetch from "../hooks/useFetch";
 
 function RickMorty() {
-  const [characters, setCharacters] = useState([]);
   const [search, setSearch] = useState("");
   const [species, setSpecies] = useState("0");
   const [_, setSearchParam] = useSearchParams();
+
+  const url = import.meta.env.VITE_MORTY_API;
+  const { data, isLoading, error } = useFetch(url);
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -47,30 +50,6 @@ function RickMorty() {
       console.error(error);
     }
   };
-
-  useEffect(() => {
-    (async () => {
-      const url = `${import.meta.env.VITE_MORTY_API}`;
-      try {
-        const response = await fetch(url);
-        if (!response.ok)
-          throw new Error(`${response.status}: ${response.statusText}`);
-        const data = await response.json();
-        const ricks = data.results;
-        const newCharacters = ricks.map((item, idx) => {
-          return {
-            id: idx,
-            idChar: item.id,
-            image: item.image,
-            name: item.name,
-          };
-        });
-        setCharacters(newCharacters);
-      } catch (error) {
-        console.error(error);
-      }
-    })();
-  }, []);
 
   return (
     <div>
@@ -120,7 +99,7 @@ function RickMorty() {
           </form>
         </section>
         <div className="grid grid-cols-3 grid-rows-3 gap-2 px-5 pb-5">
-          <ShowRickMorty arrChar={characters} />
+          <ShowRickMorty arrChar={data} />
         </div>
       </main>
       <Footer />
