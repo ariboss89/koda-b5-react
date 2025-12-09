@@ -7,7 +7,7 @@ function ShowRickMorty({ arrChar }) {
       {arrChar.map((character, idx) => {
         return (
           <GridRickMorty
-            id={character.idChar}
+            id={character.id}
             name={character.name}
             img={character.image}
             key={idx}
