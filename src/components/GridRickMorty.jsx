@@ -5,7 +5,7 @@ function GridRickMorty(props) {
   //const { id, slug } = useParams();
   const navigate = useNavigate();
   const clickHandler = () => {
-    navigate(`/RickMorty/${props.id}/${props.name}`);
+    navigate(`/rickmorty/${props.id}/${props.name}`);
   };
 
   return (

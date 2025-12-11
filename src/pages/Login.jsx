@@ -18,7 +18,6 @@ function Login() {
     if (form.email != "" && form.password != "") {
       console.log(`Email anda ${form.email} & Password anda ${form.password}`);
     }
-
     setForm({ email: "", password: "" });
   };
 

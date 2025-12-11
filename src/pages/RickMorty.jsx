@@ -2,7 +2,7 @@ import { useState } from "react";
 import ShowRickMorty from "../components/ShowRickMorty";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { useSearchParams } from "react-router";
+import { Outlet, useSearchParams } from "react-router";
 import useFetch from "../hooks/useFetch";
 
 function RickMorty() {
@@ -53,7 +53,6 @@ function RickMorty() {
 
   return (
     <div>
-      <Header />
       <main>
         <section>
           <form
@@ -102,7 +101,6 @@ function RickMorty() {
           <ShowRickMorty arrChar={data} />
         </div>
       </main>
-      <Footer />
     </div>
   );
 }

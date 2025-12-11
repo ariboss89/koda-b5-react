@@ -10,7 +10,6 @@ function Home() {
 
   return (
     <div>
-      <Header />
       <main className="flex flex-col ">
         <div className="flex flex-row justify-center items-center p-20 gap-5 gallery min-w-200 select-none">
           <div className="gallery-cell ">
@@ -69,7 +68,6 @@ function Home() {
           </>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }

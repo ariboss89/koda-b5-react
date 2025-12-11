@@ -14,12 +14,10 @@ function Products() {
   console.log(import.meta.env.VITE_MY_ENV);
   return (
     <div>
-      <Header />
       <main className="flex min-h-[85vh] p-5">
         <ShowProducts products={products} />
         <AddProduct changeProducts={setProducts} />
       </main>
-      <Footer />
     </div>
   );
 }

@@ -19,9 +19,12 @@ function Header() {
             </li>
             <li className="hover:text-gray-600">
               <Link
-                to={"/RickMorty"}
+                to={"/rickmorty"}
                 className={
-                  location.pathname === "/RickMorty" ? "text-gray-600" : ""
+                  location.pathname === "/rickmorty" ||
+                  location.pathname === "/rickmorty/:id/:slug"
+                    ? "text-gray-600"
+                    : ""
                 }
               >
                 Rick & Morty
@@ -29,12 +32,22 @@ function Header() {
             </li>
             <li className="hover:text-gray-600">
               <Link
-                to={"/Products"}
+                to={"/products"}
                 className={
-                  location.pathname === "/Products" ? "text-gray-600" : ""
+                  location.pathname === "/products" ? "text-gray-600" : ""
                 }
               >
                 Products
+              </Link>
+            </li>
+            <li className="hover:text-gray-600">
+              <Link
+                to={"/survey"}
+                className={
+                  location.pathname === "/survey" ? "text-gray-600" : ""
+                }
+              >
+                Surveys
               </Link>
             </li>
           </ul>
