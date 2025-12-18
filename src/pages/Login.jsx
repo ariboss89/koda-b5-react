@@ -29,7 +29,7 @@ function Login() {
 
   return (
     <>
-      <main className="bg-[url(../images/bg.png)] bg-cover">
+      <main className="bg-[url(../images/bg.png)] bg-cover after:absolute after:inset-0 after:z-10 after:bg-black/60">
         <section>
           <div className="flex flex-col justify-center items-center rounded-sm">
             <div className="flex justify-center align-center text-center mt-10">

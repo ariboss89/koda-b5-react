@@ -1,12 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
-const addProductThunk = createAsyncThunk(
-  "product/postProduct",
-  async (payload, { rejectWithValue }) => {
-    try {
-    } catch (error) {}
-  }
-);
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   surveys: [],
